@@ -1,0 +1,72 @@
+/* Estilos generales para la ventana principal */
+QMainWindow {
+    background-color: #333333;
+    color: #FFFFFF;
+}
+
+/* Estilos para los botones */
+QPushButton {
+    background-color: #50C878;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 6px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #409D64;
+}
+
+/* Estilos para el área de gráficos */
+QGraphicsView {
+    background-color: #E0E0E0;
+    border: 2px solid #50C878;
+}
+
+/* Estilos para QMessageBox y QFileDialog */
+QMessageBox, QFileDialog {
+    background-color: #FFFFFF;
+    color: #333333;
+}
+
+/* Estilos para botones dentro de QMessageBox y QFileDialog */
+QMessageBox QPushButton, QFileDialog QPushButton {
+    background-color: #FF4040;
+    color: #FFFFFF;
+    border-radius: 4px;
+}
+
+QMessageBox QPushButton:hover, QFileDialog QPushButton:hover {
+    background-color: #f86e6e;
+}
+
+/* Estilos para las celdas de la tabla */
+QTableWidgetItem {
+    background-color: #FFFFFF;
+    color: #333333;
+}
+
+/* Estilo para la barra de menús (si es aplicable) */
+QMenuBar {
+    background-color: #333333;
+    color: #FFFFFF;
+}
+
+QMenuBar::item {
+    background-color: #333333;
+    color: #FFFFFF;
+}
+
+QMenuBar::item:selected {
+    background-color: #50C878;
+    color: #FFFFFF;
+}
+
+/* Estilo para la barra de estado (si es aplicable) */
+QStatusBar {
+    background-color: #333333;
+    color: #FFFFFF;
+}
