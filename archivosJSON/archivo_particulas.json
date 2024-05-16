@@ -1,6 +1,6 @@
 [
      {
-          "id": 64,
+          "id": "64",
           "origen_x": 9,
           "origen_y": 65,
           "destino_x": 8,
@@ -11,7 +11,7 @@
           "blue": 8
      },
      {
-          "id": 1,
+          "id": "1",
           "origen_x": 12,
           "origen_y": 8,
           "destino_x": 56,
@@ -22,7 +22,7 @@
           "blue": 58
      },
      {
-          "id": 2,
+          "id": "2",
           "origen_x": 45,
           "origen_y": 63,
           "destino_x": 2,
@@ -33,7 +33,7 @@
           "blue": 25
      },
      {
-          "id": 3,
+          "id": "3",
           "origen_x": 63,
           "origen_y": 26,
           "destino_x": 12,
@@ -44,7 +44,7 @@
           "blue": 52
      },
      {
-          "id": 73,
+          "id": "73",
           "origen_x": 45,
           "origen_y": 7,
           "destino_x": 48,

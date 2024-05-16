@@ -81,7 +81,7 @@ class MainWindow( QMainWindow ):
     
     @Slot()
     def click_agregar_final( self ):
-        id = self.ui.id_spinBox.value()
+        id = str(self.ui.id_spinBox.value())
         origenX = self.ui.origenX_spinBox.value()
         origenY = self.ui.origenY_spinBox.value()
         destinoX = self.ui.destinoX_spinBox.value()
@@ -96,7 +96,7 @@ class MainWindow( QMainWindow ):
         
     @Slot()
     def click_agregar_inicio(self):
-        id = self.ui.id_spinBox.value()
+        id = str(self.ui.id_spinBox.value())
         origenX = self.ui.origenX_spinBox.value()
         origenY = self.ui.origenY_spinBox.value()
         destinoX = self.ui.destinoX_spinBox.value()
@@ -292,6 +292,9 @@ class MainWindow( QMainWindow ):
             
     @Slot()
     def mostrar_puntos_cercanos(self):
+        pen = QPen()
+        pen.setWidth(2)
+        pen.setColor(QColor(255, 255, 255))
         puntos = []
         
         for particula in self.particulas:
@@ -305,7 +308,7 @@ class MainWindow( QMainWindow ):
             origen_y, destino_y = punto2
             #El ajuste de +3 en las coordenadas es para centrar el inicio y el final de la línea en el centro
             #de las elipses.
-            self.scene.addLine(origen_x+3, destino_x+3, origen_y+3, destino_y+3)
+            self.scene.addLine(origen_x+3, destino_x+3, origen_y+3, destino_y+3, pen)
 
 
     @Slot()
@@ -328,21 +331,32 @@ class MainWindow( QMainWindow ):
 
         for origen, destinos in self.grafo.grafo.items():
             # Agregar etiqueta al nodo origen
-            origen_label = self.scene.addText(f'({origen[0]}, {origen[1]})')
+            origen_label = QGraphicsTextItem(f'({origen[0]}, {origen[1]})')
+            color_texto = QColor("#FFFFFF")
+            origen_label.setDefaultTextColor(color_texto)
             origen_label.setPos(origen[0] + radius, origen[1] - 10)
+            self.scene.addItem(origen_label)
 
             for destino, peso in destinos:
                 # Agregar etiqueta al nodo destino solo si no ha sido agregada anteriormente
                 if destino not in self.node_items:
-                    destino_label = self.scene.addText(f'({destino[0]}, {destino[1]})')
+                    destino_label = QGraphicsTextItem(f'({destino[0]}, {destino[1]})')
+                    color_texto = QColor("#FFFFFF")
+                    destino_label.setDefaultTextColor(color_texto)
                     destino_label.setPos(destino[0] + radius, destino[1] - 10)
+                    self.scene.addItem(destino_label)
                     self.node_items[destino] = True  # Marca que el nodo destino ya tiene etiqueta
 
                 # Agregar etiqueta de peso de la arista
                 mid_x = (origen[0] + destino[0]) / 2
                 mid_y = (origen[1] + destino[1]) / 2
-                peso_label = self.scene.addText(str(peso))
-                peso_label.setPos(mid_x, mid_y - 10)
+                
+                texto_peso = QGraphicsTextItem(f"{peso}")
+                color_texto = QColor("#FFFFFF")
+                texto_peso.setDefaultTextColor(color_texto)
+                texto_peso.setPos(mid_x, mid_y - 10)
+                self.scene.addItem(texto_peso)
+
                 
     @Slot()
     def ejecutar_dijkstra(self):
@@ -388,6 +402,11 @@ class MainWindow( QMainWindow ):
         # Empezar desde el nodo de destino y retroceder hasta el nodo de inicio
         nodo_actual = destino
         while nodo_actual != inicio:
+            if nodo_actual not in padres:
+                print(f"Error: el nodo {nodo_actual} no tiene padre en el diccionario.")
+                QMessageBox.warning(self, 'Error', f'El nodo {nodo_actual} no tiene padre en el diccionario.')
+                return
+            
             padre = padres[nodo_actual]
             if padre is None:
                 break
@@ -401,6 +420,8 @@ class MainWindow( QMainWindow ):
             
         # Mostrar el peso total en la escena
         texto_peso = QGraphicsTextItem(f"Peso Total: {peso_total}")
+        color_texto = QColor("#FFFFFF")
+        texto_peso.setDefaultTextColor(color_texto)
         texto_peso.setPos(10, 10)  # Posición del texto en la escena
         self.scene.addItem(texto_peso)
         
