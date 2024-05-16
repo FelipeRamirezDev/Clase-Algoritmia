@@ -55,3 +55,52 @@ class Grafo:
                     heapq.heappush(cola_prioridad, (distancia, vecino))
         
         return distancias, padres
+    
+    
+    # Métodos para Kruskal
+    def make_set(self, vertice):
+        self.padre[vertice] = vertice
+        self.rango[vertice] = 0
+
+    def find(self, vertice):
+        if self.padre[vertice] != vertice:
+            self.padre[vertice] = self.find(self.padre[vertice])
+        return self.padre[vertice]
+
+    def union(self, vertice1, vertice2):
+        raiz1 = self.find(vertice1)
+        raiz2 = self.find(vertice2)
+
+        if raiz1 != raiz2:
+            if self.rango[raiz1] > self.rango[raiz2]:
+                self.padre[raiz2] = raiz1
+            else:
+                self.padre[raiz1] = raiz2
+                if self.rango[raiz1] == self.rango[raiz2]:
+                    self.rango[raiz2] += 1
+
+    def kruskal(self):
+        # Inicializar estructuras para el algoritmo de Kruskal
+        self.padre = {}
+        self.rango = {}
+
+        # Crear conjuntos disjuntos
+        for vertice in self.grafo:
+            self.make_set(vertice)
+
+        # Crear lista de aristas con sus pesos
+        aristas = []
+        for origen in self.grafo:
+            for destino, peso in self.grafo[origen]:
+                aristas.append((peso, origen, destino))
+
+        # Ordenar aristas por peso
+        aristas.sort()
+
+        mst = []
+        for peso, origen, destino in aristas:
+            if self.find(origen) != self.find(destino):
+                self.union(origen, destino)
+                mst.append((origen, destino, peso))
+
+        return mst

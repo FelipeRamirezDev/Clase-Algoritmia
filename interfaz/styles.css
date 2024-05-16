@@ -1,97 +1,177 @@
 QWidget {
-    background-color: #1B3A4B;
-    color: #E0E0E0;
+    background-color: #363943; /* Fondo azul marino oscuro */
+    color: #F0F0F0; /* Texto blanco */
     font-family: Arial, sans-serif;
 }
 
 QGroupBox {
-    border: 1px solid #065A60;
+    border: 1px solid #495057; /* Borde azul marino más oscuro */
     border-radius: 5px;
     margin-top: 10px;
 }
 QGroupBox::title {
     padding: 0 3px;
-    background-color: #065A60;
-    color: #E0E0E0;
+    background-color: #495057; /* Fondo del título azul marino más oscuro */
+    color: #F0F0F0; /* Texto del título blanco */
 }
 
 QTabWidget::pane {
-    border: 1px solid #065A60;
+    border: 1px solid #495057; /* Borde azul marino más oscuro */
 }
 QTabBar::tab {
-    background-color: #006466;
-    color: #E0E0E0;
+    background-color: #3D444D; /* Fondo de la pestaña azul marino */
+    color: #F0F0F0; /* Texto de la pestaña blanco */
     padding: 10px;
     margin-right: 2px;
-    border: 1px solid #065A60;
+    border: 1px solid #495057; /* Borde azul marino más oscuro */
     border-bottom: none;
     border-radius: 4px 4px 0 0;
 }
 QTabBar::tab:hover {
-    background-color: #065A60;
-    border-color: #065A60;
+    background-color: #56616C; /* Azul marino más oscuro al pasar el cursor */
+    border-color: #495057; /* Borde azul marino más oscuro al pasar el cursor */
 }
 QTabBar::tab:selected {
-    background-color: #0B525B;
-    border-color: #065A60;
+    background-color: #697682; /* Azul marino oscuro para la pestaña seleccionada */
+    border-color: #495057; /* Borde azul marino oscuro para la pestaña seleccionada */
 }
 
 QPushButton {
-    background-color: #006466;
-    color: #FFFFFF;
-    border: 1px solid #065A60;
+    background-color: #2196F3; /* Fondo azul */
+    color: #FFFFFF; /* Texto blanco */
+    border: 1px solid #495057; /* Borde azul marino más oscuro */
     border-radius: 10px;
     padding: 10px;
 }
 QPushButton:hover {
-    background-color: #065A60;
+    background-color: #1976D2; /* Azul más oscuro al pasar el cursor */
 }
 QPushButton:pressed {
-    background-color: #0B525B;
+    background-color: #175EBC; /* Azul aún más oscuro al presionar */
 }
 
 QLineEdit {
-    background-color: #212F45;
-    border: 1px solid #065A60;
+    background-color: #424854; /* Fondo azul marino */
+    border: 1px solid #495057; /* Borde azul marino más oscuro */
     padding: 5px;
     border-radius: 4px;
-    color: #E0E0E0;
+    color: #F0F0F0; /* Texto blanco */
 }
 
 QSpinBox {
-    background-color: #212F45;
-    border: 1px solid #065A60;
+    background-color: #424854; /* Fondo azul marino */
+    border: 1px solid #495057; /* Borde azul marino más oscuro */
     padding: 5px;
     border-radius: 4px;
-    color: #E0E0E0;
+    color: #F0F0F0; /* Texto blanco */
 }
 
 QLabel {
-    color: #E0E0E0;
+    color: #F0F0F0; /* Texto blanco */
 }
 
 QPlainTextEdit {
-    background-color: #212F45;
-    border: 1px solid #065A60;
-    color: #E0E0E0;
+    background-color: #424854; /* Fondo azul marino */
+    border: 1px solid #495057; /* Borde azul marino más oscuro */
+    color: #F0F0F0; /* Texto blanco */
     padding: 5px;
     border-radius: 4px;
 }
 
 QTableWidget {
-    background-color: #212F45;
-    border: 1px solid #065A60;
-    color: #E0E0E0;
-    border-color: #065A60;
+    background-color: #424854; /* Fondo azul marino */
+    border: 1px solid #495057; /* Borde azul marino más oscuro */
+    color: #F0F0F0; /* Texto blanco */
+    border-color: #495057; /* Color del borde azul marino oscuro */
 }
 QHeaderView::section {
-    background-color: #0B525B;
-    color: #E0E0E0;
+    background-color: #3D444D; /* Fondo del encabezado azul marino */
+    color: #F0F0F0; /* Texto del encabezado blanco */
     padding: 5px;
-    border: 1px solid #065A60;
+    border: 1px solid #495057; /* Borde azul marino más oscuro */
 }
 
+/* Completando el código CSS para el tema oscuro azulado */
+
 QGraphicsView {
-    background-color: #212F45;
-    border: 1px solid #065A60;
+    background-color: #424854; /* Fondo azul marino */
+    border: 1px solid #495057; /* Borde azul marino más oscuro */
+}
+
+QScrollBar::add-line {
+    background-color: #495057; /* Fondo de la flecha hacia arriba */
+    border-right: 1px solid #3D444D; /* Borde derecho azul marino */
+}
+QScrollBar::sub-line {
+    background-color: #495057; /* Fondo de la flecha hacia abajo */
+    border-left: 1px solid #3D444D; /* Borde izquierdo azul marino */
+}
+QScrollBar::handle {
+    background-color: #56616C; /* Fondo de la barra de desplazamiento */
+    border: 1px solid #495057; /* Borde de la barra de desplazamiento */
+}
+QScrollBar::handle:hover {
+    background-color: #697682; /* Color de la barra de desplazamiento al pasar el cursor */
+}
+
+QMenu::item {
+    background-color: #3D444D; /* Fondo del elemento del menú */
+    color: #F0F0F0; /* Texto del elemento del menú blanco */
+    padding: 5px;
+}
+QMenu::item:selected {
+    background-color: #697682; /* Fondo del elemento del menú seleccionado */
+    color: #FFFFFF; /* Texto del elemento del menú seleccionado blanco */
+}
+
+QComboBox {
+    background-color: #424854; /* Fondo del cuadro combinado */
+    border: 1px solid #495057; /* Borde del cuadro combinado */
+    color: #F0F0F0; /* Texto del cuadro combinado blanco */
+    padding: 5px;
+    border-radius: 4px;
+}
+QComboBox::down-arrow {
+    background-color: #495057; /* Fondo de la flecha desplegable */
+    border-left: 1px solid #3D444D; /* Borde izquierdo de la flecha desplegable */
+}
+QComboBox::down-arrow:hover {
+    background-color: #697682; /* Color de la flecha desplegable al pasar el cursor */
+}
+
+QDateTimeEdit {
+    background-color: #424854; /* Fondo del editor de fecha y hora */
+    border: 1px solid #495057; /* Borde del editor de fecha y hora */
+    color: #F0F0F0; /* Texto del editor de fecha y hora blanco */
+    padding: 5px;
+    border-radius: 4px;
+}
+QDateTimeEdit::down-arrow {
+    background-color: #495057; /* Fondo de la flecha desplegable */
+    border-left: 1px solid #3D444D; /* Borde izquierdo de la flecha desplegable */
+}
+QDateTimeEdit::down-arrow:hover {
+    background-color: #697682; /* Color de la flecha desplegable al pasar el cursor */
+}
+
+QProgressBar {
+    background-color: #495057; /* Fondo de la barra de progreso */
+    border: 1px solid #3D444D; /* Borde de la barra de progreso */
+    padding: 2px;
+    margin: 0;
+    border-radius: 4px;
+}
+QProgressBar::value {
+    background-color: #2196F3; /* Color del valor de la barra de progreso */
+}
+
+QSlider::groove {
+    background-color: #495057; /* Fondo del surco del control deslizante */
+    border: 1px solid #3D444D; /* Borde del surco del control deslizante */
+}
+QSlider::handle {
+    background-color: #56616C; /* Fondo del mango del control deslizante */
+    border: 1px solid #495057; /* Borde del mango del control deslizante */
+    margin: -4px 0; /* Ajustar el margen para que coincida con el ancho del surco */
+    border-radius: 4px;
 }

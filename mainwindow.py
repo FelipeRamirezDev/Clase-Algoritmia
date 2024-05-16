@@ -49,6 +49,7 @@ class MainWindow( QMainWindow ):
         self.menu_grafos = QMenu()
         self.menu_grafos.addAction("Representacion en grafo", self.dibujar_grafo)
         self.menu_grafos.addAction("Dijkstra", self.ejecutar_dijkstra)
+        self.menu_grafos.addAction("Kruskal", self.ejecutar_kruskal)
         self.ui.grafos_pushButton.setMenu(self.menu_grafos)
 
         # Conectar los botones con sus respectivas funciones
@@ -316,7 +317,8 @@ class MainWindow( QMainWindow ):
         # Limpiar pantalla
         self.ui.salida.clear()
         # Construir el grafo a partir de las partículas
-        self.grafo.construir_desde_particulas(self.particulas)
+        if not self.grafo.grafo:
+            self.grafo.construir_desde_particulas(self.particulas)
         # Utiliza una variable para capturar el texto que representa el grafo
         texto_del_grafo = self.grafo.mostrar_grafo()
         # Mostrar el texto del grafo en QPlainTextEdit
@@ -422,7 +424,7 @@ class MainWindow( QMainWindow ):
         texto_peso = QGraphicsTextItem(f"Peso Total: {peso_total}")
         color_texto = QColor("#FFFFFF")
         texto_peso.setDefaultTextColor(color_texto)
-        texto_peso.setPos(10, 10)  # Posición del texto en la escena
+        texto_peso.setPos(-80, -80)  # Posición del texto en la escena
         self.scene.addItem(texto_peso)
         
         # Marcar el nodo de inicio
@@ -434,3 +436,29 @@ class MainWindow( QMainWindow ):
         self.scene.addEllipse(destino[0], destino[1], 6, 6, pen)
 
 
+    @Slot()
+    def ejecutar_kruskal(self):
+        # Construir el grafo a partir de las partículas
+        self.grafo.construir_desde_particulas(self.particulas)
+        mst = self.grafo.kruskal()
+        
+        # Limpiar la escena
+        self.scene.clear()
+
+        # Dibujar el MST
+        pen = QPen()
+        pen.setWidth(2)
+        pen.setColor(QColor(255, 0, 0))  # Rojo para destacar las aristas del MST
+        
+        for origen, destino, peso in mst:
+            self.scene.addEllipse(origen[0], origen[1], 6, 6, pen)
+            self.scene.addEllipse(destino[0], destino[1], 6, 6, pen)
+            self.scene.addLine(origen[0]+3, origen[1]+3, destino[0]+3, destino[1]+3, pen)
+        
+        # Mostrar el peso total del MST
+        peso_total = sum(peso for _, _, peso in mst)
+        texto_peso = QGraphicsTextItem(f"Peso Total del Arbol de Expansión Mínima (MST): {peso_total}")
+        color_texto = QColor("#FFFFFF")
+        texto_peso.setDefaultTextColor(color_texto)
+        texto_peso.setPos(-80, -80)  # Posición del texto en la escena
+        self.scene.addItem(texto_peso)

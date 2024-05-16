@@ -1,57 +1,112 @@
 [
-     {
-          "id": "64",
-          "origen_x": 9,
-          "origen_y": 65,
-          "destino_x": 8,
-          "destino_y": 4,
-          "velocidad": 33,
-          "red": 5,
-          "green": 7,
-          "blue": 8
-     },
-     {
-          "id": "1",
-          "origen_x": 12,
-          "origen_y": 8,
-          "destino_x": 56,
-          "destino_y": 87,
-          "velocidad": 87,
-          "red": 4,
-          "green": 65,
-          "blue": 58
-     },
-     {
-          "id": "2",
-          "origen_x": 45,
-          "origen_y": 63,
-          "destino_x": 2,
-          "destino_y": 74,
-          "velocidad": 43,
-          "red": 67,
-          "green": 2,
-          "blue": 25
-     },
-     {
-          "id": "3",
-          "origen_x": 63,
-          "origen_y": 26,
-          "destino_x": 12,
-          "destino_y": 367,
-          "velocidad": 24,
-          "red": 25,
-          "green": 1,
-          "blue": 52
-     },
-     {
-          "id": "73",
-          "origen_x": 45,
-          "origen_y": 7,
-          "destino_x": 48,
-          "destino_y": 33,
-          "velocidad": 77,
-          "red": 55,
-          "green": 88,
-          "blue": 43
-     }
+    {
+        "id": "1",
+        "origen_x": 100,
+        "origen_y": 100,
+        "destino_x": 200,
+        "destino_y": 200,
+        "red": 200,
+        "green": 200,
+        "blue": 100,
+        "velocidad": 90.0
+    },
+    {
+        "id": "2",
+        "origen_x": 200,
+        "origen_y": 200,
+        "destino_x": 100,
+        "destino_y": 100,
+        "red": 200,
+        "green": 60,
+        "blue": 100,
+        "velocidad": 90.0
+    },
+    {
+        "id": "3",
+        "origen_x": 200,
+        "origen_y": 200,
+        "destino_x": 300,
+        "destino_y": 100,
+        "red": 50,
+        "green": 200,
+        "blue": 100,
+        "velocidad": 45.0
+    },
+    {
+        "id": "4",
+        "origen_x": 300,
+        "origen_y": 100,
+        "destino_x": 200,
+        "destino_y": 200,
+        "red": 100,
+        "green": 100,
+        "blue": 250,
+        "velocidad": 70.0
+    },
+    {
+        "id": "5",
+        "origen_x": 300,
+        "origen_y": 100,
+        "destino_x": 400,
+        "destino_y": 200,
+        "red": 255,
+        "green": 100,
+        "blue": 50,
+        "velocidad": 85.0
+    },
+    {
+        "id": "6",
+        "origen_x": 100,
+        "origen_y": 100,
+        "destino_x": 100,
+        "destino_y": 200,
+        "red": 200,
+        "green": 0,
+        "blue": 100,
+        "velocidad": 60.0
+    },
+    {
+        "id": "7",
+        "origen_x": 100,
+        "origen_y": 200,
+        "destino_x": 200,
+        "destino_y": 200,
+        "red": 0,
+        "green": 200,
+        "blue": 0,
+        "velocidad": 100.0
+    },
+    {
+        "id": "8",
+        "origen_x": 200,
+        "origen_y": 200,
+        "destino_x": 100,
+        "destino_y": 100,
+        "red": 100,
+        "green": 50,
+        "blue": 200,
+        "velocidad": 75.0
+    },
+    {
+        "id": "9",
+        "origen_x": 200,
+        "origen_y": 100,
+        "destino_x": 100,
+        "destino_y": 100,
+        "red": 255,
+        "green": 0,
+        "blue": 0,
+        "velocidad": 55.0
+    },
+    {
+        "id": "10",
+        "origen_x": 200,
+        "origen_y": 200,
+        "destino_x": 300,
+        "destino_y": 100,
+        "red": 0,
+        "green": 0,
+        "blue": 255,
+        "velocidad": 80.0
+    }
 ]
