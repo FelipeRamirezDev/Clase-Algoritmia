@@ -1,11 +1,13 @@
-from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QTableWidgetItem, QGraphicsScene, QApplication, QMenu
+from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QTableWidgetItem, QGraphicsScene, QDialog, QMenu, QGraphicsTextItem
 from PySide2.QtCore import Slot
-from PySide2.QtGui import QPen, QColor, QWheelEvent, QFontDatabase, QFont
+from PySide2.QtGui import QPen, QColor, QWheelEvent
 from interfaz.ui_mainwindow import Ui_MainWindow
 from Particula import Particula
 from Particulas import Particulas
 from algoritmos import puntos_mas_cercanos
 from Grafo import Grafo
+from dialogo_ids import DialogoIDs
+
 
 class MainWindow( QMainWindow ):
     def __init__( self ):
@@ -13,10 +15,12 @@ class MainWindow( QMainWindow ):
         
         self.particulas = Particulas()
         self.ui = Ui_MainWindow()
+        
         #Cargar y Aplicar el Diseño de la Interfaz
         self.ui.setupUi( self )
         self.scene = QGraphicsScene()
         self.ui.graphicsView.setScene(self.scene)
+        
         # Inicialización y configuración del grafo
         self.grafo = Grafo()
         self.node_items = {}
@@ -39,11 +43,15 @@ class MainWindow( QMainWindow ):
         self.menu_puntos = QMenu()
         self.menu_puntos.addAction("Puntos", self.dibujar_puntos)
         self.menu_puntos.addAction("Puntos cercanos", self.mostrar_puntos_cercanos)
-        self.menu_puntos.addAction("Representacion en grafo", self.dibujar_grafo)
         self.ui.ver_pushButton.setMenu(self.menu_puntos)
         
-        
-        
+        # Agregar QMenu a boton Grafos para mostrar el grafo y ejecutar los algoritmos
+        self.menu_grafos = QMenu()
+        self.menu_grafos.addAction("Representacion en grafo", self.dibujar_grafo)
+        self.menu_grafos.addAction("Dijkstra", self.ejecutar_dijkstra)
+        self.ui.grafos_pushButton.setMenu(self.menu_grafos)
+
+        # Conectar los botones con sus respectivas funciones
         self.ui.agregar_final_pushButton.clicked.connect( self.click_agregar_final )
         self.ui.agregar_inicio_pushButton.clicked.connect( self.click_agregar_inicio )
         self.ui.mostrar_pushButton.clicked.connect( self.click_mostrar )
@@ -315,6 +323,7 @@ class MainWindow( QMainWindow ):
         
     @Slot()
     def dibujar_grafo(self):
+        self.dibujar()
         radius = 3  # Radio del nodo para el ajuste de la posición del texto
 
         for origen, destinos in self.grafo.grafo.items():
@@ -334,3 +343,73 @@ class MainWindow( QMainWindow ):
                 mid_y = (origen[1] + destino[1]) / 2
                 peso_label = self.scene.addText(str(peso))
                 peso_label.setPos(mid_x, mid_y - 10)
+                
+    @Slot()
+    def ejecutar_dijkstra(self):
+        # Obtener los IDs de las partículas de inicio y destino
+        dialogo = DialogoIDs(self)
+        if dialogo.exec_() == QDialog.Accepted:
+            inicio_id, destino_id = dialogo.get_ids()
+
+        # Buscar las partículas correspondientes
+        particula_inicio = next((p for p in self.particulas if p.id == inicio_id), None)
+        particula_destino = next((p for p in self.particulas if p.id == destino_id), None)
+
+        if particula_inicio is None or particula_destino is None:
+            QMessageBox.warning(self, 'Error', 'Nodo de inicio o destino no encontrado')
+            return
+        
+        inicio = (particula_inicio.origen_x, particula_inicio.origen_y)
+        destino = (particula_destino.destino_x, particula_destino.destino_y)
+        
+        # Asegurarse de que el grafo está construido
+        self.grafo.construir_desde_particulas(self.particulas)
+        
+        # Ejecutar Dijkstra
+        distancias, padres = self.grafo.dijkstra(inicio)
+        
+        # Mostrar los resultados en la salida
+        self.ui.salida.clear()
+        self.ui.salida.insertPlainText("Distancias desde el nodo de inicio:\n")
+        for nodo, distancia in distancias.items():
+            self.ui.salida.insertPlainText(f"Nodo {nodo}: {distancia}\n")
+        
+        # Dibujar el camino más corto
+        self.dibujar_camino_corto(padres, inicio, destino)
+
+    def dibujar_camino_corto(self, padres, inicio, destino):
+        pen = QPen()
+        pen.setWidth(2)
+        pen.setColor(QColor(255, 0, 0))  # Rojo para destacar el camino más corto
+        
+        # Inicializar el peso total
+        peso_total = 0
+        
+        # Empezar desde el nodo de destino y retroceder hasta el nodo de inicio
+        nodo_actual = destino
+        while nodo_actual != inicio:
+            padre = padres[nodo_actual]
+            if padre is None:
+                break
+            # Calcular la distancia entre el nodo actual y su padre
+            distancia = self.grafo.distancia_entre_nodos(nodo_actual, padre)
+            # Sumar la distancia al peso total
+            peso_total += distancia
+            # Dibujar la línea entre el nodo actual y su padre
+            self.scene.addLine(padre[0] + 3, padre[1] + 3, nodo_actual[0] + 3, nodo_actual[1] + 3, pen)
+            nodo_actual = padre
+            
+        # Mostrar el peso total en la escena
+        texto_peso = QGraphicsTextItem(f"Peso Total: {peso_total}")
+        texto_peso.setPos(10, 10)  # Posición del texto en la escena
+        self.scene.addItem(texto_peso)
+        
+        # Marcar el nodo de inicio
+        pen.setColor(QColor(0, 255, 0))  # Verde para el nodo de inicio
+        self.scene.addEllipse(inicio[0], inicio[1], 6, 6, pen)
+        
+        # Marcar el nodo de destino
+        pen.setColor(QColor(0, 0, 255))  # Azul para el nodo de destino
+        self.scene.addEllipse(destino[0], destino[1], 6, 6, pen)
+
+

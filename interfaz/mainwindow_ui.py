@@ -289,7 +289,12 @@ class Ui_MainWindow(object):
         self.ver_pushButton.setObjectName(u"ver_pushButton")
         self.ver_pushButton.setCursor(QCursor(Qt.PointingHandCursor))
 
-        self.gridLayout_6.addWidget(self.ver_pushButton, 2, 0, 1, 2)
+        self.gridLayout_6.addWidget(self.ver_pushButton, 2, 0, 1, 1)
+
+        self.grafos_pushButton = QPushButton(self.tab_3)
+        self.grafos_pushButton.setObjectName(u"grafos_pushButton")
+
+        self.gridLayout_6.addWidget(self.grafos_pushButton, 2, 1, 1, 1)
 
         self.tabWidget.addTab(self.tab_3, "")
 
@@ -380,8 +385,9 @@ class Ui_MainWindow(object):
         self.ordenamientos_pushButton2.setText(QCoreApplication.translate("MainWindow", u"Ordenamientos", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Tabla", None))
         self.limpiar_pushButton.setText(QCoreApplication.translate("MainWindow", u"Limpiar", None))
-        self.dibujar_pushButton.setText(QCoreApplication.translate("MainWindow", u"Dibujar", None))
+        self.dibujar_pushButton.setText(QCoreApplication.translate("MainWindow", u"Dibujar Particulas", None))
         self.ver_pushButton.setText(QCoreApplication.translate("MainWindow", u"Ver", None))
+        self.grafos_pushButton.setText(QCoreApplication.translate("MainWindow", u"Grafos", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("MainWindow", u"Dibujar", None))
         self.menuArchivo.setTitle(QCoreApplication.translate("MainWindow", u"Archivo", None))
     # retranslateUi
